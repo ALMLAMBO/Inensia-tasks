@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function getAllElements() {
+            let head = document.getElementsByTagName("head");
+            let elements = [];
+            getAllChildElements(head[0], elements);
+
+            window.onload = function() {
+                let body = document.body;
+                getAllChildElements(body, elements);
+            }
+
+            console.log(elements); // Can be also printed using unordered list
+        }
+
+        //Gets all child elements via DFS algorithm
+        function getAllChildElements(element, elements) {
+            if(element.childElementCount > 0) {
+                elements.push(element.localName);
+
+                for (let i = 0; i < element.childElementCount; i++) {
+                    getAllChildElements(element.children[i], elements);
+                }
+            }
+            else if(element.childElementCount === 0) { // adding leaves of the tree
+                elements.push(element.localName);
+            }
+        }
+
+        getAllElements();
+    </script>
+</head>
+<body>
+    <h1>Sample page</h1>
+    <div id="row">
+        <div id="col1">
+            <h2>section1</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                A adipisci blanditiis dicta ducimus explicabo, facilis id illo, impedit
+                incidunt maiores minima molestias, officiis perspiciatis qui ratione similique tempore ullam vel?
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.0
+                A adipisci blanditiis dicta ducimus explicabo, facilis id illo, impedit
+                incidunt maiores minima molestias, officiis perspiciatis qui ratione similique tempore ullam vel?
+            </p>
+        </div>
+        <div id="col2">
+            <p>
+                <a href="#">Lipsum dolor</a> A adipisci blanditiis dicta ducimus explicabo, facilis id illo, impedit
+                incidunt maiores minima molestias, officiis perspiciatis qui ratione similique tempore ullam vel?
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                A adipisci blanditiis dicta ducimus explicabo, facilis id illo, impedit
+                incidunt maiores minima molestias, officiis perspiciatis qui ratione similique tempore ullam vel?
+            </p>
+        </div>
+    </div>
+    <footer>
+        <ul id="bottomMenu">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </footer>
+</body>
+</html>
